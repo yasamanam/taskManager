@@ -5,10 +5,6 @@ const AddTask = ({ addTask }) => {
   const [day, setDay] = useState("");
   const [reminder, setReminder] = useState(true);
 
-  useEffect(() => {
-    console.log(reminder);
-  }, [reminder]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 

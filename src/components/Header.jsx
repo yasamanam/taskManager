@@ -1,6 +1,7 @@
+import React, { useEffect } from "react";
+
 import Button from "./Button";
 import Proptypes from "prop-types";
-import React from "react";
 
 /**
  *Header component is for displaying main title
@@ -8,8 +9,27 @@ import React from "react";
 
 const Header = ({ headerTitle, num, onAdd, showAddtask }) => {
   const handleClick = (a) => {
-    console.log("Click", a);
     onAdd();
+  };
+
+  useEffect(() => {
+    /*
+     * For the First time
+     */
+    console.log("Header component mounted");
+    document.addEventListener("click", () => console.log("event"));
+
+    return () => {
+      document.removeEventListener("click", () => console.log("event"));
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(countStars());
+  }, [headerTitle]);
+
+  const countStars = () => {
+    return headerTitle.split("*").length - 1;
   };
 
   return (

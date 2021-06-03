@@ -180,3 +180,24 @@ footer {
   text-align: center;
   margin-top: 80px;
 }
+
+.mainHeader {
+  background: rgb(26, 131, 105);
+  color: white;
+  font-size: 16px;
+  padding: 15px 40px;
+  margin-bottom: 40px;
+}
+
+.mainHeader a {
+  text-decoration: none;
+  color: white;
+  margin-right: 20px;
+}
+
+.mainHeader__active {
+  color: rgb(54, 54, 54) !important;
+  font-weight: bold;
+  font-size: 17px;
+  border-bottom: 2px solid rgb(54, 54, 54);
+}

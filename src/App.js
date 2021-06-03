@@ -1,4 +1,7 @@
+import "react-toastify/dist/ReactToastify.css";
+
 import React, { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 import AddTask from "./components/AddTask";
 import Header from "./components/Header";
@@ -27,10 +30,9 @@ const App = () => {
     try {
       const response = await fetch("http://localhost:5000/tasks");
       const data = await response.json();
-
       return data;
     } catch (err) {
-      console.log(err);
+      toast.error("request failed!");
     } finally {
       console.log("it is done!!");
     }
@@ -44,7 +46,7 @@ const App = () => {
       method: "DELETE",
     })
       .then((res) => setTasks(tasks.filter((task) => task.id !== taskId)))
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("request failed!"));
   };
 
   /*
@@ -61,22 +63,28 @@ const App = () => {
    * Add task
    */
   const addTask = async (task) => {
-    const res = await fetch("http://localhost:5000/tasks/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(task),
-    });
+    try {
+      const res = await fetch("http://localhost:5000/tasks/", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(task),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    console.log(data);
-    setTasks([...tasks, data]);
+      console.log(data);
+      setTasks([...tasks, data]);
+      toast.success(`${data.text} added successfully`);
+    } catch (e) {
+      toast.error(`${task.text} didn't add becuase of an unkown error:(`);
+    }
   };
 
   return (
     <div className="container">
+      <ToastContainer />
       <Header
         headerTitle={title}
         num={num}

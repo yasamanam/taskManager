@@ -24,21 +24,27 @@ const App = () => {
    * Fetch Tasks
    */
   const fetchTasks = async () => {
-    const response = await fetch("http://localhost:5000/tasks");
-    const data = await response.json();
+    try {
+      const response = await fetch("http://localhost:5000/tasks");
+      const data = await response.json();
 
-    return data;
+      return data;
+    } catch (err) {
+      console.log(err);
+    } finally {
+      console.log("it is done!!");
+    }
   };
 
   /*
    * Delete a task
    */
-  const handleDelete = async (taskId) => {
-    await fetch(`http://localhost:5000/tasks/${taskId}`, {
+  const handleDelete = (taskId) => {
+    fetch(`http://localhost:5000/tasks/${taskId}`, {
       method: "DELETE",
-    });
-
-    setTasks(tasks.filter((task) => task.id !== taskId));
+    })
+      .then((res) => setTasks(tasks.filter((task) => task.id !== taskId)))
+      .catch((err) => console.log(err));
   };
 
   /*
@@ -54,10 +60,19 @@ const App = () => {
   /*
    * Add task
    */
-  const addTask = (task) => {
-    let id = Math.floor(Math.random() * 100) + 1;
-    let newTask = { ...task, id };
-    setTasks([...tasks, newTask]);
+  const addTask = async (task) => {
+    const res = await fetch("http://localhost:5000/tasks/", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(task),
+    });
+
+    const data = await res.json();
+
+    console.log(data);
+    setTasks([...tasks, data]);
   };
 
   return (
@@ -69,7 +84,7 @@ const App = () => {
         showAddtask={showAddtask}
       />
       {showAddtask && <AddTask addTask={addTask} />}
-      {tasks.length > 0 ? (
+      {tasks?.length > 0 ? (
         <Tasks
           tasksList={tasks}
           onDelete={handleDelete}

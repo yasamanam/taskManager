@@ -28,13 +28,26 @@ const App = () => {
    */
   const fetchTasks = async () => {
     try {
-      const response = await fetch("http://localhost:5000/tasks");
+      const response = await fetch(`http://localhost:5000/tasks`);
       const data = await response.json();
       return data;
     } catch (err) {
       toast.error("request failed!");
     } finally {
       console.log("it is done!!");
+    }
+  };
+
+  /*
+   * Fetch a single Task by Id
+   */
+  const fetchTask = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/tasks/${id}`);
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      toast.error("request failed!");
     }
   };
 
@@ -52,11 +65,38 @@ const App = () => {
   /*
    * Toggle reminder
    */
-  const reminderToggle = (id) => {
-    let tempTask = tasks.map((task) =>
-      task.id === id ? { ...task, reminder: !task.reminder } : task
-    );
-    setTasks(tempTask);
+  const reminderToggle = async (id) => {
+    /*
+     * Step1. Find the task you want to toggle
+     */
+    const taskToToggle = await fetchTask(id);
+
+    /*
+     * Step2. Toggle reminder property of the founded object
+     */
+    const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
+
+    /*
+     * Step3. Save the changes of the task object
+     */
+    try {
+      const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(updatedTask),
+      });
+
+      const data = await res.json();
+      setTasks(
+        tasks.map((task) =>
+          task.id === id ? { ...task, reminder: data.reminder } : task
+        )
+      );
+    } catch (error) {
+      toast.error("error happened!");
+    }
   };
 
   /*
@@ -74,7 +114,6 @@ const App = () => {
 
       const data = await res.json();
 
-      console.log(data);
       setTasks([...tasks, data]);
       toast.success(`${data.text} added successfully`);
     } catch (e) {

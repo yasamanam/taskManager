@@ -1,11 +1,15 @@
 import { FaWindowClose } from "react-icons/fa";
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 const Task = ({ task, onDelete, reminderToggle }) => {
+  let history = useHistory();
+
   return (
     <div
       className={`task event ${task.reminder && "reminder"}`}
       onDoubleClick={() => reminderToggle(task.id)}
+      onClick={() => history.push(`/task/${task.id}`)}
     >
       <div>
         <p>{task.text}</p>
@@ -14,7 +18,10 @@ const Task = ({ task, onDelete, reminderToggle }) => {
 
       <FaWindowClose
         className="task__close"
-        onClick={() => onDelete(task.id)}
+        onClick={(e) => {
+          onDelete(task.id);
+          e.stopPropagation();
+        }}
       />
     </div>
   );

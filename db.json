@@ -1,46 +1,22 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "text": "Daoctors Appointment",
-      "day": "Feb 5th at 2:30pm",
-      "reminder": false
+      "text": "Doctor meeting",
+      "day": "Mond. at 114:00",
+      "reminder": true,
+      "id": 1
     },
     {
-      "id": 2,
-      "text": "Meeting at School",
-      "day": "Feb 6th at 1:30pm",
-      "reminder": false
+      "text": "Maktab class",
+      "day": "Wedn. at 18:00",
+      "reminder": true,
+      "id": 2
     },
     {
-      "text": "new task",
-      "day": " t",
+      "text": "Shopping",
+      "day": "Friday at 17:00",
       "reminder": false,
       "id": 3
-    },
-    {
-      "text": "tesst",
-      "day": "2",
-      "reminder": false,
-      "id": 4
-    },
-    {
-      "text": "h",
-      "day": "ujh",
-      "reminder": true,
-      "id": 5
-    },
-    {
-      "text": "yasaman",
-      "day": "r",
-      "reminder": true,
-      "id": 6
-    },
-    {
-      "text": "hvgjh",
-      "day": "vjhv ",
-      "reminder": false,
-      "id": 7
     }
   ]
 }

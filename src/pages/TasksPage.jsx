@@ -1,17 +1,19 @@
 import "react-toastify/dist/ReactToastify.css";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 import AddTask from "./../components/AddTask";
 import Header from "./../components/Header";
 import Tasks from "./../components/Tasks";
+import { ThemeContext } from "./../context/theme/ThemeContext";
 
 const TasksPage = () => {
   const [title, setTitle] = useState("Task Manager");
   const [tasks, setTasks] = useState([]);
   const [num, setNum] = useState(1);
   const [showAddtask, setShowAddtask] = useState(false);
+  const { isDark, setIsDark } = useContext(ThemeContext);
 
   useEffect(() => {
     const getTasks = async () => {
@@ -129,7 +131,15 @@ const TasksPage = () => {
   };
 
   return (
-    <div className="container">
+    <div
+      // style={{
+      //   backgroundColor: !isDark ? "yellow" : "black",
+      // }}
+      className="container"
+    >
+      {/* <button onClick={() => setIsDark(!isDark)}>
+        {!isDark ? "Dark mode" : "Light mode"}
+      </button> */}
       <ToastContainer />
       <Header
         headerTitle={title}

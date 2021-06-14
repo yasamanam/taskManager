@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from "react";
 
-import ExpensesReducer from "./ExpensesReducer";
+import { ExpensesReducer } from "./ExpensesReducer";
 
 //Initial state
 const initialState = {
@@ -43,11 +43,19 @@ export const ExpensesProvider = ({ children }) => {
     });
   }
 
+  function addTransaction(transaction) {
+    dispatch({
+      type: "ADD_TRANSACTION",
+      payload: transaction,
+    });
+  }
+
   return (
     <ExpensesContext.Provider
       value={{
         transactions: state.transactions,
         deleteTransaction,
+        addTransaction,
       }}
     >
       {children}

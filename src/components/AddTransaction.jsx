@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+
+import { ExpensesContext } from "./../context/ExpensesContext";
 
 const AddTransaction = () => {
   const [text, setText] = useState("");
   const [amount, setAmount] = useState("");
+  const { addTransaction } = useContext(ExpensesContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newTransaction = {
+      id: Math.floor(Math.random() * 1000000000),
+      text,
+      amount: +amount,
+    };
+    addTransaction(newTransaction);
+  };
 
   return (
     <div>
       <h3>Add New Transaction</h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="form-control">
           <label htmlFor="text">Text</label>
           <input
@@ -28,7 +41,9 @@ const AddTransaction = () => {
             id="amount"
           />
         </div>
-        <button className="btn-c">Add Transaction</button>
+        <button type="submit" className="btn-c">
+          Add Transaction
+        </button>
       </form>
     </div>
   );

@@ -1,17 +1,18 @@
-import { FaWindowClose } from "react-icons/fa";
-import React from "react";
+import React, { useContext } from "react";
+
+import { ExpensesContext } from "./../context/ExpensesContext";
+import Transaction from "./Transaction";
 
 const TransactionList = () => {
+  const { transactions } = useContext(ExpensesContext);
+
   return (
     <>
       <h3>History</h3>
       <ul className="list">
-        <li className="minus">
-          Cash <span>-$400</span>{" "}
-          <button className="delete-btn">
-            <FaWindowClose />
-          </button>
-        </li>
+        {transactions.map((transaction) => (
+          <Transaction key={transaction.id} transaction={transaction} />
+        ))}
       </ul>
     </>
   );

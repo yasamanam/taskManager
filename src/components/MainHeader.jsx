@@ -1,10 +1,16 @@
+import { NavLink, useHistory } from "react-router-dom";
 import React, { useContext } from "react";
 
-import { NavLink } from "react-router-dom";
 import { ThemeContext } from "./../context/theme/ThemeContext";
+import { isLoggedIn } from "./../utils/auth";
 
 const MainHeader = () => {
-  const { isDark, setIsDark } = useContext(ThemeContext);
+  // const { isDark, setIsDark } = useContext(ThemeContext);
+  const history = useHistory();
+
+  const handleGoToLogin = () => {
+    history.push("/login");
+  };
 
   return (
     <div
@@ -16,12 +22,16 @@ const MainHeader = () => {
       <NavLink to="/" exact activeClassName="mainHeader__active">
         Home
       </NavLink>
-      <NavLink to="/expenses" activeClassName="mainHeader__active">
-        My Expenses
-      </NavLink>
+      {isLoggedIn() && (
+        <NavLink to="/expenses" activeClassName="mainHeader__active">
+          My Expenses
+        </NavLink>
+      )}
       <NavLink to="/about" activeClassName="mainHeader__active">
         About
       </NavLink>
+
+      <button onClick={handleGoToLogin}>Login</button>
     </div>
   );
 };

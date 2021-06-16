@@ -1,4 +1,4 @@
-import "./index.css";
+import "./assets/sass/app.scss";
 
 import { Link, Route, Switch } from "react-router-dom";
 
@@ -12,8 +12,6 @@ import React from "react";
 import TaskPage from "./pages/TaskPage";
 import TasksPage from "./pages/TasksPage";
 import { ThemeProvider } from "./context/theme/ThemeContext";
-
-// import "./assets/sass/app.scss";
 
 const App = () => {
   return (

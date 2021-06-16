@@ -31,7 +31,7 @@ const MainHeader = () => {
         About
       </NavLink>
 
-      {!isLoggedIn ? (
+      {!isLoggedIn() ? (
         <button className="header__btn" onClick={handleGoToLogin}>
           Login
         </button>

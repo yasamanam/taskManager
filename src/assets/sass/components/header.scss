@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+
+  &__btn {
+    background-color: $light;
+    color: $gray;
+    padding: 8px 15px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+
+    &:hover {
+      box-shadow: 0 3px 6px #0909096e;
+    }
+
+    &:active {
+      transform: scale(0.98);
+      box-shadow: none;
+    }
+  }
+}

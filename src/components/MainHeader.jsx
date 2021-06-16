@@ -17,7 +17,7 @@ const MainHeader = () => {
       // style={{
       //   backgroundColor: !isDark ? "yellow" : "black",
       // }}
-      className="mainHeader"
+      className="mainHeader header"
     >
       <NavLink to="/" exact activeClassName="mainHeader__active">
         Home
@@ -31,7 +31,9 @@ const MainHeader = () => {
         About
       </NavLink>
 
-      <button onClick={handleGoToLogin}>Login</button>
+      <button className="header__btn" onClick={handleGoToLogin}>
+        Login
+      </button>
     </div>
   );
 };

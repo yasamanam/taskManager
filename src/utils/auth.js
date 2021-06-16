@@ -8,3 +8,12 @@ export const isLoggedIn = () => {
 
   return false;
 };
+
+export const logout = () => {
+  /*
+   * Clear localStorage
+   */
+
+  localStorage.clear();
+  window.location.reload();
+};

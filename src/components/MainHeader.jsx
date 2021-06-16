@@ -1,8 +1,8 @@
 import { NavLink, useHistory } from "react-router-dom";
 import React, { useContext } from "react";
+import { isLoggedIn, logout } from "./../utils/auth";
 
 import { ThemeContext } from "./../context/theme/ThemeContext";
-import { isLoggedIn } from "./../utils/auth";
 
 const MainHeader = () => {
   // const { isDark, setIsDark } = useContext(ThemeContext);
@@ -31,9 +31,15 @@ const MainHeader = () => {
         About
       </NavLink>
 
-      <button className="header__btn" onClick={handleGoToLogin}>
-        Login
-      </button>
+      {!isLoggedIn ? (
+        <button className="header__btn" onClick={handleGoToLogin}>
+          Login
+        </button>
+      ) : (
+        <button className="header__btn" onClick={logout}>
+          Logout
+        </button>
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import "./assets/sass/app.scss";
 
 import { Link, Route, Switch } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 import AboutPage from "./pages/AboutPage";
 import ExpensePage from "./pages/ExpensePage";
@@ -17,6 +18,7 @@ const App = () => {
   return (
     <React.Fragment>
       <ThemeProvider>
+        <ToastContainer />
         <MainHeader />
 
         <Switch>
